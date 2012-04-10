@@ -3,8 +3,6 @@ Web.Optimization
 
 Web.Optimization allow you to transform LESS and CoffeeScript files by making use of the upcoming bundling and minification feature.
 
-----------
-
 ##Installation
 
 * Get the packages via NuGet
