@@ -6,47 +6,49 @@ namespace Web.Optimization.Configuration.Extensions
 {
     public static class BundleCollectionExtensions
     {
-         public static void RegisterFromConfiguration(
-             this BundleCollection collection)
-         {
-             var config = Optimization.Config;
-             if (config == null)
-             {
-                 throw new ConfigurationErrorsException(
-                     "Could not find a section with name 'optimization'");
-             }
+        public static void RegisterFromConfiguration(
+            this BundleCollection bundles)
+        {
+            var section = OptimizationSection.GetSection();
+            if (section == null)
+            {
+                throw new ConfigurationErrorsException(
+                    "Could not find a section with name 'optimization'");
+            }
 
-             foreach (BundleElement element in config.Bundles)
-             {
-                 var type = Type.GetType(element.Transform);
-                 if (type == null || !typeof(IBundleTransform).IsAssignableFrom(type))
-                     continue;
-                 
-                 var transform = Activator.CreateInstance(type);
+            foreach (BundleElement bundleElement in section.Bundles)
+            {
+                var type = bundleElement.Transform;
+                if (type == null || !typeof(IBundleTransform).IsAssignableFrom(type))
+                    continue;
 
-                 var bundle =
-                     new Bundle(
-                         element.VirtualPath,
-                         (IBundleTransform) transform);
+                var transform = Activator.CreateInstance(type);
 
-                 foreach (AddElement file in element.Files)
-                 {
-                     bundle.AddFile(file.VirtualPath, file.ThrowIfNotExist);
-                 }
+                var bundle =
+                    new Bundle(
+                        bundleElement.VirtualPath,
+                        (IBundleTransform)transform);
 
-                 if (!string.IsNullOrEmpty(element.Directory.VirtualPath))
-                 {
-                     var directory = element.Directory;
+                foreach (BundleContentElement contentElement in bundleElement.Content)
+                {
+                    if (string.IsNullOrEmpty(contentElement.SearchPattern))
+                    {
+                        bundle.AddFile(
+                            contentElement.VirtualPath,
+                            contentElement.ThrowIfNotExist);
+                    }
+                    else
+                    {
+                        bundle.AddDirectory(
+                            contentElement.VirtualPath,
+                            contentElement.SearchPattern,
+                            contentElement.SearchSubdirectories,
+                            contentElement.ThrowIfNotExist);
+                    }
+                }
 
-                     bundle.AddDirectory(
-                         directory.VirtualPath,
-                         directory.SearchPattern,
-                         directory.SearchSubdirectories,
-                         directory.ThrowIfNotExist);
-                 }
-
-                 collection.Add(bundle);
-             }
-         }
+                bundles.Add(bundle);
+            }
+        }
     }
 }

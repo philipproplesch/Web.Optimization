@@ -50,15 +50,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddElement.cs" />
-    <Compile Include="BundleElement.cs" />
-    <Compile Include="BundlesElementCollection.cs" />
-    <Compile Include="DirectoryElement.cs" />
+    <Compile Include="BundleElementCollection.cs" />
     <Compile Include="Extensions\BundleCollectionExtensions.cs" />
-    <Compile Include="FilesElementCollection.cs" />
-    <Compile Include="Optimization.cs" />
     <Compile Include="OptimizationSection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BundleContentElement.cs" />
+    <Compile Include="BundleContentElementCollection.cs" />
+    <Compile Include="BundleElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

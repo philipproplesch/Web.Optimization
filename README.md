@@ -48,25 +48,27 @@ Web.Optimization allows you to transform LESS and CoffeeScript files by making u
 
 ## Usage - Configuration
 
-``Web.Optimization.Configuration`` allows you to register all your bundles in the web.config.
-
+``Web.Optimization.Configuration`` allows you to register all your bundles in the web.config:
+	
 	<configSections>
-	  <section name="optimization" type="Web.Optimization.Configuration.OptimizationSection" />
+	  <section name="web.optimization" type="Web.Optimization.Configuration.OptimizationSection" />
 	</configSections>
 	
-	<optimization>
+	<web.optimization>
 	  <bundles>
 	    <bundle virtualPath="~/Content/css" transform="System.Web.Optimization.CssMinify, System.Web.Optimization">
-	      <files>
+	      <content>
+			<!-- Add some single files -->
 	        <add virtualPath="~/Content/Site.css" />
-	      </files>
-	    </bundle>
-	    <bundle virtualPath="~/Content/less" transform="Web.Optimization.Bundles.Less.LessMinify, Web.Optimization.Bundles.Less">        
-	      <directory virtualPath="~/Content" searchPattern="*.less" />
+	        <add virtualPath="~/Content/Forms.css" />
+			<!-- Add directories  -->
+	        <add virtualPath="~/Content/Styles" searchPattern="*.css" searchSubdirectories="true" />
+	      </content>
 	    </bundle>
 	  </bundles>
-	</optimization>
+	</web.optimization>
 
+After the registration is done, you have to tell your application to use these bundles:
 
 	protected void Application_Start()
 	{
