@@ -39,9 +39,9 @@ Web.Optimization allow you to transform LESS and CoffeeScript files by making us
 	      var styles = new Bundle("~/Content/less", new LessMinify());
 	    #endif
 	    
-		scripts.AddFile("~/Content/first.less", false);
-	    scripts.AddFile("~/Content/second.less", false);
-	    scripts.AddFile("~/Content/third.less", false);
+		styles.AddFile("~/Content/first.less", false);
+	    styles.AddFile("~/Content/second.less", false);
+	    styles.AddFile("~/Content/third.less", false);
 	
 	    BundleTable.Bundles.Add(styles);
 	}
