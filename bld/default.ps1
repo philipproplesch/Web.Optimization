@@ -27,7 +27,7 @@ Task Create-NuGetPackages -depends Build, Set-PackageVersion {
 }
 
 Task Build {
-  #Exec { msbuild "$src\Web.Optimization.sln" /t:Build /p:Configuration=Release }
+  Exec { msbuild "$src\Web.Optimization.sln" /t:Build /p:Configuration=Release }
 }
 
 Task Set-PackageVersion {

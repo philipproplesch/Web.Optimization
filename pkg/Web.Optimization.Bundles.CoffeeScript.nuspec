@@ -14,7 +14,7 @@
     <id>Web.Optimization.Bundles.CoffeeScript</id>
     <title />
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Allows you to handle CoffeeScript files with the new System.Web.Optimization bundles.</description>
+    <description>CoffeeScript processing for System.Web.Optimization bundles.</description>
     <tags>coffeescript coffee-script javascript js bundle optimization minify</tags>
   </metadata>
   <files>
