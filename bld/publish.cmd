@@ -1,0 +1,1 @@
+powershell .\psake Publish

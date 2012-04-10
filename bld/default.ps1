@@ -5,7 +5,9 @@ $out = Join-Path $base 'out'
 $nuget = "$src\.nuget\NuGet.exe"
 $version = "0.0.0"
 
-Task Default -depends Initialize-Directories, Create-NuGetPackages
+Task Default -depends Build
+
+Task Publish -depends Initialize-Directories, Create-NuGetPackages
 
 Task Initialize-Directories {
   if(Test-Path $out) {
