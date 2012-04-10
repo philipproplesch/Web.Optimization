@@ -1,7 +1,7 @@
 Web.Optimization
 ================
 
-Web.Optimization allow you to transform LESS and CoffeeScript files by making use of the upcoming bundling and minification feature.
+Web.Optimization allows you to transform LESS and CoffeeScript files by making use of the upcoming bundling and minification features.
 
 ##Installation
 
@@ -10,7 +10,7 @@ Web.Optimization allow you to transform LESS and CoffeeScript files by making us
   * [Install-Package Web.Optimization.Bundles.Less -Pre](https://nuget.org/packages/Web.Optimization.Bundles.Less)
 * Clone or download the code from GitHub => Build the solution => Add references to your project.
 
-##Usage
+##Usage - Bundles
 
 	protected void Application_Start()
 	{
@@ -44,4 +44,33 @@ Web.Optimization allow you to transform LESS and CoffeeScript files by making us
 	    styles.AddFile("~/Content/third.less", false);
 	
 	    BundleTable.Bundles.Add(styles);
+	}
+
+## Usage - Configuration
+
+``Web.Optimization.Configuration`` allows you to register all your bundles in the web.config.
+
+	<configSections>
+	  <section name="optimization" type="Web.Optimization.Configuration.OptimizationSection" />
+	</configSections>
+	
+	<optimization>
+	  <bundles>
+	    <bundle virtualPath="~/Content/css" transform="System.Web.Optimization.CssMinify, System.Web.Optimization">
+	      <files>
+	        <add virtualPath="~/Content/Site.css" />
+	      </files>
+	    </bundle>
+	    <bundle virtualPath="~/Content/less" transform="Web.Optimization.Bundles.Less.LessMinify, Web.Optimization.Bundles.Less">        
+	      <directory virtualPath="~/Content" searchPattern="*.less" />
+	    </bundle>
+	  </bundles>
+	</optimization>
+
+
+	protected void Application_Start()
+	{
+	  // ...
+	
+	  BundleTable.Bundles.RegisterFromConfiguration();
 	}
