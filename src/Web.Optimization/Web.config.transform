@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <configSections>
+    <section name="web.optimization" type="Web.Optimization.Configuration.OptimizationSection" />
+  </configSections>
+
+  <web.optimization>
+    <bundles>
+      <bundle virtualPath="~/Content/sample" transform="System.Web.Optimization.CssMinify, System.Web.Optimization">
+        <content>
+          <!-- Add some single files -->
+          <add virtualPath="~/Content/Site.css" throwIfNotExist="false" />
+          <!-- Add a directory (and its subdirectories) -->          
+          <add virtualPath="~/Content/Styles" searchPattern="*.css" searchSubdirectories="true" />
+        </content>
+      </bundle>
+    </bundles>
+  </web.optimization>
+</configuration>
