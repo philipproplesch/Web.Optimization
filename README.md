@@ -6,6 +6,7 @@ Web.Optimization allows you to transform LESS and CoffeeScript files by making u
 ##Installation
 
 * Get the packages via NuGet
+  * [Install-Package Web.Optimization -Pre](https://nuget.org/packages/Web.Optimization)
   * [Install-Package Web.Optimization.Bundles.CoffeeScript -Pre](https://nuget.org/packages/Web.Optimization.Bundles.CoffeeScript)
   * [Install-Package Web.Optimization.Bundles.Less -Pre](https://nuget.org/packages/Web.Optimization.Bundles.Less)
 * Clone or download the code from GitHub => Build the solution => Add references to your project.
