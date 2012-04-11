@@ -7,7 +7,7 @@ namespace Web.Optimization.Extensions
 {
     public static class BundleCollectionExtensions
     {
-        public static void RegisterFromConfiguration(
+        public static void RegisterConfigurationBundles(
             this BundleCollection bundles)
         {
             var section = OptimizationSection.GetSection();
@@ -24,11 +24,19 @@ namespace Web.Optimization.Extensions
                     continue;
 
                 var transform = Activator.CreateInstance(type);
+                
+                var isNewBundle = false;
 
-                var bundle =
-                    new Bundle(
+                // Check if there is a bundle with the same virtual path.
+                var bundle = bundles.GetBundleFor(bundleElement.VirtualPath);
+                if (bundle == null)
+                {
+                    isNewBundle = true;
+
+                    bundle = new Bundle(
                         bundleElement.VirtualPath,
                         (IBundleTransform)transform);
+                }
                 
                 foreach (BundleContentElement contentElement in bundleElement.Content)
                 {
@@ -47,8 +55,9 @@ namespace Web.Optimization.Extensions
                             contentElement.ThrowIfNotExist);
                     }
                 }
-                
-                bundles.Add(bundle);
+
+                if (isNewBundle)
+                    bundles.Add(bundle);
             }
         }
     }

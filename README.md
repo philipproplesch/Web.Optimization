@@ -75,5 +75,5 @@ After the registration is done, you have to tell your application to use these b
 	{
 	  // ...
 	
-	  BundleTable.Bundles.RegisterFromConfiguration();
+	  BundleTable.Bundles.RegisterConfigurationBundles();
 	}
