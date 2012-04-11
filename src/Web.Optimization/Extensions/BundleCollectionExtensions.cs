@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Configuration;
 using System.Web.Optimization;
+using Web.Optimization.Configuration;
 
-namespace Web.Optimization.Configuration.Extensions
+namespace Web.Optimization.Extensions
 {
     public static class BundleCollectionExtensions
     {
@@ -13,7 +14,7 @@ namespace Web.Optimization.Configuration.Extensions
             if (section == null)
             {
                 throw new ConfigurationErrorsException(
-                    "Could not find a section with name 'optimization'");
+                    "Could not find a section with name 'web.optimization'.");
             }
 
             foreach (BundleElement bundleElement in section.Bundles)
@@ -28,7 +29,7 @@ namespace Web.Optimization.Configuration.Extensions
                     new Bundle(
                         bundleElement.VirtualPath,
                         (IBundleTransform)transform);
-
+                
                 foreach (BundleContentElement contentElement in bundleElement.Content)
                 {
                     if (string.IsNullOrEmpty(contentElement.SearchPattern))
@@ -46,7 +47,7 @@ namespace Web.Optimization.Configuration.Extensions
                             contentElement.ThrowIfNotExist);
                     }
                 }
-
+                
                 bundles.Add(bundle);
             }
         }

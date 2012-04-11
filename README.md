@@ -10,7 +10,7 @@ Web.Optimization allows you to transform LESS and CoffeeScript files by making u
   * [Install-Package Web.Optimization.Bundles.Less -Pre](https://nuget.org/packages/Web.Optimization.Bundles.Less)
 * Clone or download the code from GitHub => Build the solution => Add references to your project.
 
-##Usage - Bundles
+##Usage - Bundles (CoffeeScript & LESS)
 
 	protected void Application_Start()
 	{
@@ -48,7 +48,7 @@ Web.Optimization allows you to transform LESS and CoffeeScript files by making u
 
 ## Usage - Configuration
 
-``Web.Optimization.Configuration`` allows you to register all your bundles in the web.config:
+``Web.Optimization`` contains a ConfigurationSection, which allows you to register all your bundles in the web.config:
 	
 	<configSections>
 	  <section name="web.optimization" type="Web.Optimization.Configuration.OptimizationSection" />
@@ -61,7 +61,7 @@ Web.Optimization allows you to transform LESS and CoffeeScript files by making u
 			<!-- Add some single files -->
 	        <add virtualPath="~/Content/Site.css" />
 	        <add virtualPath="~/Content/Forms.css" />
-			<!-- Add directories  -->
+			<!-- Add a directory (and its subdirectories) -->
 	        <add virtualPath="~/Content/Styles" searchPattern="*.css" searchSubdirectories="true" />
 	      </content>
 	    </bundle>

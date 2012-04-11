@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{97E84E
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Optimization.Configuration", "Web.Optimization.Configuration\Web.Optimization.Configuration.csproj", "{D9C9A9C8-08C1-4028-A9E5-C4387E910F76}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Optimization", "Web.Optimization\Web.Optimization.csproj", "{D9C9A9C8-08C1-4028-A9E5-C4387E910F76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
