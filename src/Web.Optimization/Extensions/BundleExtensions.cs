@@ -1,28 +1,44 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web;
 using System.Web.Optimization;
+using Web.Optimization.Common;
 
 namespace Web.Optimization.Extensions
 {
     public static class BundleExtensions
     {
         public static void AddRemoteFile(
+            this Bundle instance, string url, bool throwIfNotExist = true)
+        {
+            Uri uri;
+            if (!Uri.TryCreate(url, UriKind.Absolute, out uri))
+                throw new UriFormatException();
+
+            instance.AddRemoteFile(uri, throwIfNotExist);
+        }
+
+        public static void AddRemoteFile(
             this Bundle instance, Uri uri, bool throwIfNotExist = true)
         {
             var fileName = Path.GetFileName(uri.LocalPath);
 
             if (string.IsNullOrEmpty(fileName))
-                throw new ArgumentException("uri");
+                throw new ArgumentException(
+                    "File name seems to be invalid.",
+                    "uri");
 
             var extension = Path.GetExtension(fileName).ToUpperInvariant();
 
             var path =
                 Path.Combine(
                     HttpRuntime.AppDomainAppPath,
-                    Equals(extension, ".JS") ? "Scripts" : "Content",
+                    FileTypes.ScriptExtensions.Any(x => x.Equals(extension))
+                        ? "Scripts"
+                        : "Content",
                     "Remote",
                     fileName);
 

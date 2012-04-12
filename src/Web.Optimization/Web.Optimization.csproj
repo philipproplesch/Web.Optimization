@@ -58,6 +58,7 @@
     <Compile Include="Extensions\BundleCollectionExtensions.cs" />
     <Compile Include="Configuration\OptimizationSection.cs" />
     <Compile Include="Extensions\BundleExtensions.cs" />
+    <Compile Include="Common\FileTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\BundleContentElement.cs" />
     <Compile Include="Configuration\BundleContentElementCollection.cs" />
