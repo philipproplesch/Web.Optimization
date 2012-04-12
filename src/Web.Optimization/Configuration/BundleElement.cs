@@ -1,4 +1,3 @@
-using System;
 using System.Configuration;
 
 namespace Web.Optimization.Configuration
@@ -56,9 +55,9 @@ namespace Web.Optimization.Configuration
 
         // [TypeConverter(typeof(TypeNameConverter))]
         [ConfigurationProperty(TransformKeyName, IsRequired = false)]
-        public Type Transform
+        public string Transform
         {
-            get { return Type.GetType((string) base[TransformKeyName]); }
+            get { return (string) base[TransformKeyName]; }
         }
 
         #endregion

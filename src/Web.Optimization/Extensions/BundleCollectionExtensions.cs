@@ -19,9 +19,14 @@ namespace Web.Optimization.Extensions
 
             foreach (BundleElement bundleElement in section.Bundles)
             {
-                var type = bundleElement.Transform;
+                var type = Type.GetType(bundleElement.Transform);
                 if (type == null || !typeof(IBundleTransform).IsAssignableFrom(type))
-                    continue;
+                {
+                    throw new ConfigurationErrorsException(
+                        string.Format(
+                            "Invalid transform type: '{0}'.",
+                            bundleElement.Transform));
+                }
 
                 var transform = Activator.CreateInstance(type);
 

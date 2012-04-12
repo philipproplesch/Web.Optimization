@@ -8,7 +8,7 @@
     <id>Web.Optimization</id>
     <title />
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Allows you to your bundle configurations in the web.config file.</description>
+    <description>Allows you to your bundle configurations in the web.config file and handle remote files.</description>
     <tags>bundle optimization minify config configuration less coffeescript</tags>
   </metadata>
   <files>

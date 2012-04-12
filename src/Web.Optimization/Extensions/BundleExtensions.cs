@@ -46,7 +46,10 @@ namespace Web.Optimization.Extensions
                 path.Replace(HttpRuntime.AppDomainAppPath, "~/")
                     .Replace("\\", "/");
 
-            if (File.Exists(path))
+            var fileInfo = new FileInfo(path);
+
+            if (fileInfo.Exists && 
+                fileInfo.CreationTimeUtc > DateTime.UtcNow.AddDays(-7))
             {
                 instance.AddFile(virtualPath, throwIfNotExist);
                 return;
