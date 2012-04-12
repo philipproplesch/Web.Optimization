@@ -9,7 +9,7 @@ namespace Web.Optimization.Configuration
 
         static BundleContentElement()
         {
-            s_properties.Add(_s_propertyVirtualPath);
+            s_properties.Add(_s_propertyPath);
             s_properties.Add(_s_propertySearchPattern);
             s_properties.Add(_s_propertySearchSubdirectories);
             s_properties.Add(_s_propertyThrowIfNotExist);
@@ -20,25 +20,25 @@ namespace Web.Optimization.Configuration
             get { return s_properties; }
         }
 
-        #region VirtualPath
+        #region Path
 
-        private const string VirtualPathKeyName = "virtualPath";
+        private const string PathKeyName = "path";
 
-        private static readonly ConfigurationProperty _s_propertyVirtualPath =
+        private static readonly ConfigurationProperty _s_propertyPath =
             new ConfigurationProperty(
-                VirtualPathKeyName,
-                typeof(string),
+                PathKeyName,
+                typeof (string),
                 string.Empty,
-                ConfigurationPropertyOptions.IsRequired
-                | ConfigurationPropertyOptions.IsKey);
+                ConfigurationPropertyOptions.IsRequired |
+                ConfigurationPropertyOptions.IsKey);
 
         [ConfigurationProperty(
-            VirtualPathKeyName,
+            PathKeyName,
             IsRequired = true,
             IsKey = true)]
-        public string VirtualPath
+        public string Path
         {
-            get { return base[VirtualPathKeyName] as string; }
+            get { return base[PathKeyName] as string; }
         }
 
         #endregion

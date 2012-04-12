@@ -8,7 +8,7 @@ namespace Web.Optimization.Extensions
     public static class BundleCollectionExtensions
     {
         public static void RegisterConfigurationBundles(
-            this BundleCollection bundles)
+            this BundleCollection bundleCollection)
         {
             var section = OptimizationSection.GetSection();
             if (section == null)
@@ -24,11 +24,11 @@ namespace Web.Optimization.Extensions
                     continue;
 
                 var transform = Activator.CreateInstance(type);
-                
+
                 var isNewBundle = false;
 
                 // Check if there is a bundle with the same virtual path.
-                var bundle = bundles.GetBundleFor(bundleElement.VirtualPath);
+                var bundle = bundleCollection.GetBundleFor(bundleElement.VirtualPath);
                 if (bundle == null)
                 {
                     isNewBundle = true;
@@ -37,19 +37,31 @@ namespace Web.Optimization.Extensions
                         bundleElement.VirtualPath,
                         (IBundleTransform)transform);
                 }
-                
+
                 foreach (BundleContentElement contentElement in bundleElement.Content)
                 {
                     if (string.IsNullOrEmpty(contentElement.SearchPattern))
                     {
-                        bundle.AddFile(
-                            contentElement.VirtualPath,
-                            contentElement.ThrowIfNotExist);
+                        Uri uri;
+                        // Remote file (e.g. CDN hosted)
+                        if (Uri.TryCreate(contentElement.Path, UriKind.Absolute, out uri))
+                        {
+                            bundle.AddRemoteFile(
+                                uri,
+                                contentElement.ThrowIfNotExist);
+                        }
+                        // Local file
+                        else
+                        {
+                            bundle.AddFile(
+                                contentElement.Path,
+                                contentElement.ThrowIfNotExist);
+                        }
                     }
                     else
                     {
                         bundle.AddDirectory(
-                            contentElement.VirtualPath,
+                            contentElement.Path,
                             contentElement.SearchPattern,
                             contentElement.SearchSubdirectories,
                             contentElement.ThrowIfNotExist);
@@ -57,7 +69,7 @@ namespace Web.Optimization.Extensions
                 }
 
                 if (isNewBundle)
-                    bundles.Add(bundle);
+                    bundleCollection.Add(bundle);
             }
         }
     }

@@ -57,13 +57,14 @@ Web.Optimization allows you to transform LESS and CoffeeScript files by making u
 	
 	<web.optimization>
 	  <bundles>
-	    <bundle virtualPath="~/Content/css" transform="System.Web.Optimization.CssMinify, System.Web.Optimization">
+	    <bundle virtualPath="~/Content/js" transform="System.Web.Optimization.JsMinify, System.Web.Optimization">
 	      <content>
 			<!-- Add some single files -->
-	        <add virtualPath="~/Content/Site.css" />
-	        <add virtualPath="~/Content/Forms.css" />
+            <add path="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js" />
+	        <add path="~/Scripts/forms.js" />
+	        <add path="~/Scripts/validation.js" />            
 			<!-- Add a directory (and its subdirectories) -->
-	        <add virtualPath="~/Content/Styles" searchPattern="*.css" searchSubdirectories="true" />
+	        <add path="~/Content/Scripts/Plugins" searchPattern="*.js" searchSubdirectories="true" />
 	      </content>
 	    </bundle>
 	  </bundles>

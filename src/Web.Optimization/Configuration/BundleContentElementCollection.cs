@@ -26,7 +26,7 @@ namespace Web.Optimization.Configuration
 
             for (var idx = 0; idx < Count; idx++)
             {
-                if (this[idx].VirtualPath.Equals(
+                if (this[idx].Path.Equals(
                     name,
                     StringComparison.OrdinalIgnoreCase))
                 {
@@ -57,7 +57,7 @@ namespace Web.Optimization.Configuration
 
             return typedElement == null
                        ? string.Empty
-                       : typedElement.VirtualPath;
+                       : typedElement.Path;
         }
     }
 }
