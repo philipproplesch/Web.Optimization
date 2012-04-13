@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7E2C7DF2-FE57-412E-9958-7C90EBDA4E57}</ProjectGuid>
+    <ProjectGuid>{EB1BC172-CE97-4B0B-85AC-5C249510F24C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Web.Optimization.Bundles.YUI</RootNamespace>
-    <AssemblyName>Web.Optimization.Bundles.YUI</AssemblyName>
+    <RootNamespace>Web.Optimization.Bundles.AjaxMin</RootNamespace>
+    <AssemblyName>Web.Optimization.Bundles.AjaxMin</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -33,19 +33,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxMin, Version=4.47.4452.34008, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxMin.4.47.4452.34008\lib\net20\AjaxMin.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.Web.Optimization.1.0.0-beta\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
-    <Reference Include="Yahoo.Yui.Compressor">
-      <HintPath>..\packages\YUICompressor.NET.1.7.1.0\lib\net35\Yahoo.Yui.Compressor.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="YuiCssMinify.cs" />
-    <Compile Include="YuiJsMinify.cs" />
+    <Compile Include="AjaxMinCssMinify.cs" />
+    <Compile Include="AjaxMinJsMinify.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
