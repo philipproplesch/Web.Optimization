@@ -16,6 +16,8 @@ namespace Web.Optimization.Common
                 {
                     ".CSS",
                     ".LESS",
+                    ".SASS",
+                    ".SCSS",
                 };
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Web.Optimization;
+using Web.Optimization.Common;
 
 namespace Web.Optimization.Bundles.Less
 {
@@ -6,7 +7,7 @@ namespace Web.Optimization.Bundles.Less
     {
         public void Process(BundleContext context, BundleResponse response)
         {
-            response.ContentType = "text/css";
+            response.ContentType = ContentTypes.Css;
             response.Content = dotless.Core.Less.Parse(response.Content);
         }
     }

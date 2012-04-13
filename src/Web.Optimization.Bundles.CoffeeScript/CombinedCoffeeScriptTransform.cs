@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Web.Optimization;
+using Web.Optimization.Common;
 
 namespace Web.Optimization.Bundles.CoffeeScript
 {
@@ -10,8 +11,6 @@ namespace Web.Optimization.Bundles.CoffeeScript
     /// </summary>
     public class CombinedCoffeeScriptTransform : IBundleTransform
     {
-        private const string JavaScriptContentType = "application/javascript";
-
         public void Process(BundleContext context, BundleResponse response)
         {
             var builder = new StringBuilder();
@@ -30,7 +29,7 @@ namespace Web.Optimization.Bundles.CoffeeScript
                     ".js",
                     StringComparison.OrdinalIgnoreCase))
                 {
-                    transform = new NoTransform(JavaScriptContentType);
+                    transform = new NoTransform(ContentTypes.JavaScript);
                 }
 
                 if (transform == null || !File.Exists(file.FullName))
@@ -44,7 +43,7 @@ namespace Web.Optimization.Bundles.CoffeeScript
                 builder.AppendLine(response.Content);
             }
 
-            response.ContentType = JavaScriptContentType;
+            response.ContentType = ContentTypes.JavaScript;
             response.Content = builder.ToString();
         }
     }

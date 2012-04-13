@@ -1,9 +1,9 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Text;
 using System.Web;
 using System.Web.Optimization;
 using Jurassic;
+using Web.Optimization.Common;
 
 namespace Web.Optimization.Bundles.CoffeeScript
 {
@@ -39,7 +39,7 @@ namespace Web.Optimization.Bundles.CoffeeScript
             {
                 var js = engine.CallGlobalFunction("compile", response.Content);
                 
-                response.ContentType = "application/javascript";
+                response.ContentType = ContentTypes.JavaScript;
                 response.Content = js.ToString();
             }
             catch

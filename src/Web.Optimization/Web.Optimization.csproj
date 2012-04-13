@@ -54,11 +54,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ContentTypes.cs" />
     <Compile Include="Configuration\BundleElementCollection.cs" />
     <Compile Include="Extensions\BundleCollectionExtensions.cs" />
     <Compile Include="Configuration\OptimizationSection.cs" />
     <Compile Include="Extensions\BundleExtensions.cs" />
     <Compile Include="Common\FileTypes.cs" />
+    <Compile Include="Extensions\BundleTransformExtensions.cs" />
+    <Compile Include="Bundles\ChainedBundle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\BundleContentElement.cs" />
     <Compile Include="Configuration\BundleContentElementCollection.cs" />
