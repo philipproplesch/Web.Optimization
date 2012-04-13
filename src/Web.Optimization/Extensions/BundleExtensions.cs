@@ -42,9 +42,7 @@ namespace Web.Optimization.Extensions
                     "Remote",
                     fileName);
 
-            var virtualPath =
-                path.Replace(HttpRuntime.AppDomainAppPath, "~/")
-                    .Replace("\\", "/");
+            var virtualPath = path.ToVirtualPath();
 
             var fileInfo = new FileInfo(path);
 
