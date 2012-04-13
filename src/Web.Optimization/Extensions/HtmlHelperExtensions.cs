@@ -4,9 +4,8 @@ using System.Text;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using Web.Optimization.Common;
-using Web.Optimization.Extensions;
 
-namespace Web.Optimization
+namespace Web.Optimization.Extensions
 {
     public static class HtmlHelperExtensions
     {
