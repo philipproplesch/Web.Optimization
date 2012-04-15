@@ -55,6 +55,24 @@ Task Set-PackageVersion {
   Get-ChildItem $pkg -Filter *.nuspec | ForEach {
     $spec = [xml](Get-Content $_.FullName)
     $spec.package.metadata.version = $version
-	$spec.Save($_.FullName)
+    $spec.Save($_.FullName)
+  }
+}
+
+Task Push-Packages {
+  $apiKey = '';
+  if($args.Length -eq 1)
+  {
+    $apiKey = $args[0]
+  }
+  else
+  {
+    Write-Host 'API key: ' -NoNewline
+    $apiKey = read-host
+  }
+
+  Get-ChildItem $out -Filter *.nupkg | ForEach {
+    $pkg = $_.FullName
+    Exec { Invoke-Expression "$nuget push $pkg $apiKey" }
   }
 }
