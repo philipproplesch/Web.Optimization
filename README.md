@@ -19,11 +19,9 @@ Web.Optimization allows you to transform LESS and CoffeeScript files by making u
 		
 		// Register CoffeeScript files
 		
-		#if DEBUG
-		  var scripts = new Bundle("~/Content/coffee", new CoffeeScriptTransform());
-		#else
-		  var scripts = new Bundle("~/Content/coffee", new CoffeeScriptMinify());
-		#endif
+		var scripts = new Bundle(
+                "~/Content/coffee", 
+                new CoffeeScriptTransform().Then(new JsMinify()));
 	
 		scripts.AddFile("~/Scripts/first.coffee", false);
 		scripts.AddFile("~/Scripts/second.coffee", false);
@@ -34,11 +32,9 @@ Web.Optimization allows you to transform LESS and CoffeeScript files by making u
 		
 		// Register LESS files
 		
-	    #if DEBUG
-	      var styles = new Bundle("~/Content/less", new LessTransform());
-	    #else
-	      var styles = new Bundle("~/Content/less", new LessMinify());
-	    #endif
+	    var styles = new Bundle(
+                "~/Content/less",
+                new LessTransform().Then(new CssMinify()));
 	    
 		styles.AddFile("~/Content/first.less", false);
 	    styles.AddFile("~/Content/second.less", false);
@@ -78,3 +74,11 @@ After the registration is done, you have to tell your application to use these b
 	
 	  BundleTable.Bundles.RegisterConfigurationBundles();
 	}
+
+## Usage - Unbundled files for debugging purposes
+
+	<head>
+	  <meta charset="utf-8" />
+	  <!-- ... -->
+	  @Html.RenderBundle("~/Content/style")  
+	</head>

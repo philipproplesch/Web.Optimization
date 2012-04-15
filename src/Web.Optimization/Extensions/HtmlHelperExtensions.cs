@@ -15,7 +15,7 @@ namespace Web.Optimization.Extensions
         private const string LinkTag =
             "<link href='{0}' rel='stylesheet' type='text/css' />";
 
-        public static MvcHtmlString RenderBundleContent(
+        public static MvcHtmlString RenderBundle(
             this HtmlHelper instance, string bundleVirtualPath)
         {
             var bundle = BundleTable.Bundles.GetBundleFor(bundleVirtualPath);
