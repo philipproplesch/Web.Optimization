@@ -25,7 +25,7 @@ namespace Web.Optimization.Extensions
             this Bundle instance, Uri uri, bool throwIfNotExist = true)
         {
             var fileName = Path.GetFileName(uri.LocalPath);
-
+            
             if (string.IsNullOrEmpty(fileName))
                 throw new ArgumentException(
                     "File name seems to be invalid.",

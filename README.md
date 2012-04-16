@@ -3,15 +3,18 @@ Web.Optimization
 
 Web.Optimization allows you to transform LESS and CoffeeScript files by making use of the upcoming bundling and minification features.
 
-##Installation
+## Installation
 
 * Get the packages via NuGet
   * [Install-Package Web.Optimization -Pre](https://nuget.org/packages/Web.Optimization)
   * [Install-Package Web.Optimization.Bundles.CoffeeScript -Pre](https://nuget.org/packages/Web.Optimization.Bundles.CoffeeScript)
   * [Install-Package Web.Optimization.Bundles.Less -Pre](https://nuget.org/packages/Web.Optimization.Bundles.Less)
+  * [Install-Package Web.Optimization.Bundles.Sass -Pre](https://nuget.org/packages/Web.Optimization.Bundles.Sass)
+  * [Install-Package Web.Optimization.Bundles.AjaxMin -Pre](https://nuget.org/packages/Web.Optimization.Bundles.AjaxMin)
+  * [Install-Package Web.Optimization.Bundles.YUI -Pre](https://nuget.org/packages/Web.Optimization.Bundles.YUI)
 * Clone or download the code from GitHub => Build the solution => Add references to your project.
 
-##Usage - Bundles (CoffeeScript & LESS)
+## Usage - Bundles (CoffeeScript, LESS & SASS/SCSS)
 
 	protected void Application_Start()
 	{
