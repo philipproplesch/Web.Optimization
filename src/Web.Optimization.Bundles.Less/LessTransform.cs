@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -26,35 +27,41 @@ namespace Web.Optimization.Bundles.Less
             response.Content = builder.ToString();
         }
 
-        private static readonly Regex s_lessImport = 
+        private static readonly Regex s_lessImportRegex = 
             new Regex("@import [\"|'](.+)[\"|'];", RegexOptions.Compiled);
+
+        private static readonly Regex s_absolutePathRegex =
+            new Regex(@"^\w:\\", RegexOptions.Compiled);
 
         private static string ResolveImports(FileInfo file)
         {
             var content = File.ReadAllText(file.FullName, Encoding.UTF8);
 
-            content =
-                s_lessImport.Replace(
-                    content,
-                    match =>
+            return s_lessImportRegex.Replace(
+                content,
+                match =>
+                    {
+                        var import = match.Groups[1].Value;
+
+                        // Is absolute path?
+                        if (s_absolutePathRegex.IsMatch(import) && File.Exists(import))
                         {
-                            var name = match.Groups[1].Value;
+                            return match.Value;
+                        }
 
-                            var import =
-                                Path.Combine(
-                                    file.Directory.FullName,
-                                    name);
+                        var path =
+                            Path.Combine(
+                                file.Directory.FullName,
+                                import);
 
-                            if (!File.Exists(import))
-                            {
-                                throw new ConfigurationErrorsException(
-                                    string.Concat("Unable to resolve import ", name));
-                            }
+                        if (!File.Exists(path))
+                        {
+                            throw new ApplicationException(
+                                string.Concat("Unable to resolve import ", import));
+                        }
 
-                            return match.Value.Replace(name, import);
-                        });
-
-            return content;
+                        return match.Value.Replace(import, path);
+                    });
         }
     }
 }
