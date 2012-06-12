@@ -2,7 +2,7 @@
 {
     public class ContentTypes
     {
-        public const string Css = "text/css";
-        public const string JavaScript = "application/javascript";
+        public static readonly string Css = "text/css";
+        public static readonly string JavaScript = "application/javascript";
     }
 }

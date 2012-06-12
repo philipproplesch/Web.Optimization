@@ -30,9 +30,6 @@ namespace Web.Optimization.Bundles.Less
         private static readonly Regex s_lessImportRegex = 
             new Regex("@import [\"|'](.+)[\"|'];", RegexOptions.Compiled);
 
-        private static readonly Regex s_absolutePathRegex =
-            new Regex(@"^\w:\\", RegexOptions.Compiled);
-
         private static string ResolveImports(FileInfo file)
         {
             var content = File.ReadAllText(file.FullName, Encoding.UTF8);
@@ -44,7 +41,8 @@ namespace Web.Optimization.Bundles.Less
                         var import = match.Groups[1].Value;
 
                         // Is absolute path?
-                        if (s_absolutePathRegex.IsMatch(import) && File.Exists(import))
+                        Uri uri;
+                        if (Uri.TryCreate(import, UriKind.Absolute, out uri))
                         {
                             return match.Value;
                         }

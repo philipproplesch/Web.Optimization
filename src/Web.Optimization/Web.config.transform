@@ -10,7 +10,7 @@
         <content>
           <!-- Add some single files -->          
           <!-- <add path="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js" /> -->
-          <!-- <add path="~/Scripts/validation.js" throwIfNotExist="false" /> -->
+          <!-- <add path="~/Scripts/validation.js" /> -->
           
           <!-- Add a directory (and its subdirectories) -->          
           <!-- <add path="~/Scripts/Plugins" searchPattern="*.js" searchSubdirectories="true" /> -->

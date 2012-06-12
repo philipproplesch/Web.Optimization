@@ -12,7 +12,6 @@ namespace Web.Optimization.Configuration
             s_properties.Add(_s_propertyPath);
             s_properties.Add(_s_propertySearchPattern);
             s_properties.Add(_s_propertySearchSubdirectories);
-            s_properties.Add(_s_propertyThrowIfNotExist);
         }
 
         protected override ConfigurationPropertyCollection Properties
@@ -77,25 +76,6 @@ namespace Web.Optimization.Configuration
         public bool SearchSubdirectories
         {
             get { return (bool) base[SearchSubdirectoriesKeyName]; }
-        }
-
-        #endregion
-
-        #region ThrowIfNotExist
-
-        private const string ThrowIfNotExistKeyName = "throwIfNotExist";
-
-        private static readonly ConfigurationProperty _s_propertyThrowIfNotExist =
-            new ConfigurationProperty(
-                ThrowIfNotExistKeyName,
-                typeof(bool),
-                true,
-                ConfigurationPropertyOptions.None);
-
-        [ConfigurationProperty(ThrowIfNotExistKeyName)]
-        public bool ThrowIfNotExist
-        {
-            get { return (bool)base[ThrowIfNotExistKeyName]; }
         }
 
         #endregion

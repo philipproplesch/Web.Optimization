@@ -51,25 +51,20 @@ namespace Web.Optimization.Extensions
                         // Remote file (e.g. CDN hosted)
                         if (Uri.TryCreate(contentElement.Path, UriKind.Absolute, out uri))
                         {
-                            bundle.AddRemoteFile(
-                                uri,
-                                contentElement.ThrowIfNotExist);
+                            bundle.AddRemoteFile(uri);
                         }
                         // Local file
                         else
                         {
-                            bundle.AddFile(
-                                contentElement.Path,
-                                contentElement.ThrowIfNotExist);
+                            bundle.Include(contentElement.Path);
                         }
                     }
                     else
                     {
-                        bundle.AddDirectory(
+                        bundle.IncludeDirectory(
                             contentElement.Path,
                             contentElement.SearchPattern,
-                            contentElement.SearchSubdirectories,
-                            contentElement.ThrowIfNotExist);
+                            contentElement.SearchSubdirectories);
                     }
                 }
 

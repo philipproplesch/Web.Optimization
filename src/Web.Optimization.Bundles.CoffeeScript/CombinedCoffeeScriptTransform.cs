@@ -29,7 +29,7 @@ namespace Web.Optimization.Bundles.CoffeeScript
                     ".js",
                     StringComparison.OrdinalIgnoreCase))
                 {
-                    transform = new NoTransform(ContentTypes.JavaScript);
+                    transform = new CommonNoTransform(ContentTypes.JavaScript);
                 }
 
                 if (transform == null || !File.Exists(file.FullName))
