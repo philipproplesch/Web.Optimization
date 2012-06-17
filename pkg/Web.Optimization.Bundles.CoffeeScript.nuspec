@@ -7,8 +7,9 @@
     <projectUrl>https://github.com/philipproplesch/Web.Optimization</projectUrl>
     <dependencies>
       <dependency id="Jurassic" version="2.1.1" />
+      <dependency id="Microsoft.AspNet.Web.Optimization" version="1.0.0-beta3" />
       <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
-      <dependency id="Microsoft.Web.Optimization" version="1.0.0-beta" />
+      <dependency id="WebGrease" version="1.0.0" />
       <dependency id="CoffeeScriptCompiler" version="1.2.0" />
     </dependencies>
     <id>Web.Optimization.Bundles.CoffeeScript</id>

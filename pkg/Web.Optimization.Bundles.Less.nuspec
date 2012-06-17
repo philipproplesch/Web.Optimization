@@ -6,9 +6,10 @@
     <owners>Philip Proplesch</owners>
     <projectUrl>https://github.com/philipproplesch/Web.Optimization</projectUrl>
     <dependencies>
-      <dependency id="dotLess" version="1.3.0.0" />
+      <dependency id="dotless" version="1.3.0.4" />
+      <dependency id="Microsoft.AspNet.Web.Optimization" version="1.0.0-beta3" />
       <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
-      <dependency id="Microsoft.Web.Optimization" version="1.0.0-beta" />
+      <dependency id="WebGrease" version="1.0.0" />
     </dependencies>
     <id>Web.Optimization.Bundles.Less</id>
     <title />

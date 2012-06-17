@@ -6,9 +6,9 @@
     <owners>Philip Proplesch</owners>
     <projectUrl>https://github.com/philipproplesch/Web.Optimization</projectUrl>
     <dependencies>
-      <dependency id="AjaxMin" version="4.47.4452.34008" />
+      <dependency id="Microsoft.AspNet.Web.Optimization" version="1.0.0-beta3" />
       <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
-      <dependency id="Microsoft.Web.Optimization" version="1.0.0-beta" />
+      <dependency id="WebGrease" version="1.0.0" />
     </dependencies>
     <id>Web.Optimization.Bundles.AjaxMin</id>
     <title />

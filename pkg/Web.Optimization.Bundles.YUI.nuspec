@@ -6,9 +6,10 @@
     <owners>Philip Proplesch</owners>
     <projectUrl>https://github.com/philipproplesch/Web.Optimization</projectUrl>
     <dependencies>
-      <dependency id="YUICompressor.NET" version="1.7.1.0" />
+      <dependency id="Microsoft.AspNet.Web.Optimization" version="1.0.0-beta3" />
       <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
-      <dependency id="Microsoft.Web.Optimization" version="1.0.0-beta" />
+      <dependency id="WebGrease" version="1.0.0" />
+      <dependency id="YUICompressor.NET" version="2.0.0.0" />
     </dependencies>
     <id>Web.Optimization.Bundles.YUI</id>
     <title />
