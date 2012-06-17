@@ -23,12 +23,13 @@ Web.Optimization allows you to transform LESS and CoffeeScript files by making u
 		// Register CoffeeScript files
 		
 		var scripts = new Bundle(
-                "~/Content/coffee", 
-                new CoffeeScriptTransform().Then(new JsMinify()));
+            "~/Content/coffee", 
+            new CoffeeScriptTransform().Then(new JsMinify()));
 	
-		scripts.AddFile("~/Scripts/first.coffee", false);
-		scripts.AddFile("~/Scripts/second.coffee", false);
-		scripts.AddFile("~/Scripts/third.coffee", false);
+		instance.Include(
+            "~/Scripts/first.coffee",
+	        "~/Scripts/second.coffee",
+	        "~/Scripts/third.coffee");
 	
 		BundleTable.Bundles.Add(scripts);
 		
@@ -36,14 +37,15 @@ Web.Optimization allows you to transform LESS and CoffeeScript files by making u
 		// Register LESS files
 		
 	    var styles = new Bundle(
-                "~/Content/less",
-                new LessTransform().Then(new CssMinify()));
+            "~/Content/less",
+            new LessTransform().Then(new CssMinify()));
 	    
-		styles.AddFile("~/Content/first.less", false);
-	    styles.AddFile("~/Content/second.less", false);
-	    styles.AddFile("~/Content/third.less", false);
+		styles.Include(
+		    "~/Content/first.less", 
+		    "~/Content/second.less", 
+		    "~/Content/third.less");
 	
-	    BundleTable.Bundles.Add(styles);
+		BundleTable.Bundles.Add(styles);
 	}
 
 ## Usage - Configuration
@@ -75,7 +77,7 @@ After the registration is done, you have to tell your application to use these b
 	{
 	  // ...
 	
-	  BundleTable.Bundles.RegisterConfigurationBundles();
+	  BundleTable.Bundles.EnableConfigurationBundles();
 	}
 
 ## Usage - Unbundled files for debugging purposes

@@ -8,7 +8,9 @@ namespace Web.Optimization.Bundles.YUI
     {
         public override void Process(BundleContext context, BundleResponse response)
         {
-            response.Content = JavaScriptCompressor.Compress(response.Content);
+            var compressor = new JavaScriptCompressor();
+            
+            response.Content = compressor.Compress(response.Content);
             response.ContentType = ContentTypes.JavaScript;
         }
     }

@@ -11,17 +11,17 @@ namespace Web.Optimization.Extensions
 {
     public static class BundleExtensions
     {
-        public static void AddRemoteFile(
+        public static void IncludeRemoteFile(
             this Bundle instance, string url)
         {
             Uri uri;
             if (!Uri.TryCreate(url, UriKind.Absolute, out uri))
                 throw new UriFormatException();
 
-            instance.AddRemoteFile(uri);
+            instance.IncludeRemoteFile(uri);
         }
 
-        public static void AddRemoteFile(this Bundle instance, Uri uri)
+        public static void IncludeRemoteFile(this Bundle instance, Uri uri)
         {
             var fileName = Path.GetFileName(uri.LocalPath);
 
@@ -29,7 +29,7 @@ namespace Web.Optimization.Extensions
                 throw new ArgumentException(
                     "File name seems to be invalid.",
                     "uri");
-
+            
             var extension = Path.GetExtension(fileName).ToUpperInvariant();
 
             var path =
@@ -40,7 +40,7 @@ namespace Web.Optimization.Extensions
                         : "Content",
                     "Remote",
                     fileName);
-
+            
             var virtualPath = path.ToVirtualPath();
 
             var fileInfo = new FileInfo(path);

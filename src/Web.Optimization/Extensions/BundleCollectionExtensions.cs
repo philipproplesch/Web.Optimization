@@ -7,7 +7,7 @@ namespace Web.Optimization.Extensions
 {
     public static class BundleCollectionExtensions
     {
-        public static void RegisterConfigurationBundles(
+        public static void EnableConfigurationBundles(
             this BundleCollection bundleCollection)
         {
             var section = OptimizationSection.GetSection();
@@ -51,7 +51,7 @@ namespace Web.Optimization.Extensions
                         // Remote file (e.g. CDN hosted)
                         if (Uri.TryCreate(contentElement.Path, UriKind.Absolute, out uri))
                         {
-                            bundle.AddRemoteFile(uri);
+                            bundle.IncludeRemoteFile(uri);
                         }
                         // Local file
                         else
