@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Web;
@@ -13,12 +14,12 @@ namespace Web.Optimization.Bundles.CoffeeScript
     /// </summary>
     public class CoffeeScriptTransform : IBundleTransform
     {
-        private readonly bool useBareScripts;
-        public CoffeeScriptTransform(bool? useBareScripts= null)
+        private readonly bool _bare;
+        public CoffeeScriptTransform(bool bare = true)
         {
-            //default to bare scripts.
-            this.useBareScripts = useBareScripts ?? true;
+            _bare = bare;
         }
+
         public void Process(BundleContext context, BundleResponse response)
         {
             var coffeeScriptPath =
@@ -40,20 +41,17 @@ namespace Web.Optimization.Bundles.CoffeeScript
             engine.Execute(coffeeScriptCompiler);
 
             // Initializes a wrapper function for the CoffeeScript compiler.
-            engine.Execute(String.Format(
-                "var compile = function (src) {{ return CoffeeScript.compile(src, {{ bare: {0} }}); }};",
-                useBareScripts.ToString().ToLower()));
-            try
-            {
-                var js = engine.CallGlobalFunction("compile", response.Content);
+            var wrapperFunction =
+                string.Format(
+                    "var compile = function (src) {{ return CoffeeScript.compile(src, {{ bare: {0} }}); }};",
+                    _bare.ToString(CultureInfo.InvariantCulture).ToLower());
+            
+            engine.Execute(wrapperFunction);
+            
+            var js = engine.CallGlobalFunction("compile", response.Content);
                 
-                response.ContentType = ContentTypes.JavaScript;
-                response.Content = js.ToString();
-            }
-            catch
-            {
-                throw;
-            }
+            response.ContentType = ContentTypes.JavaScript;
+            response.Content = js.ToString();
         }
     }
 }

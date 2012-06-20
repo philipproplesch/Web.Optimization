@@ -11,11 +11,13 @@ namespace Web.Optimization.Bundles.CoffeeScript
     /// </summary>
     public class CombinedCoffeeScriptTransform : IBundleTransform
     {
-        private readonly bool useBareCoffeeScripts;
-        public CombinedCoffeeScriptTransform(bool? useBareCoffeeScripts = null)
+        private readonly bool _bare;
+
+        public CombinedCoffeeScriptTransform(bool bare = true)
         {
-            this.useBareCoffeeScripts = useBareCoffeeScripts ?? true;
+            _bare = bare;
         }
+
         public void Process(BundleContext context, BundleResponse response)
         {
             var builder = new StringBuilder();
@@ -28,7 +30,7 @@ namespace Web.Optimization.Bundles.CoffeeScript
                     ".coffee",
                     StringComparison.OrdinalIgnoreCase))
                 {
-                    transform = new CoffeeScriptTransform(useBareCoffeeScripts);
+                    transform = new CoffeeScriptTransform(_bare);
                 }
                 else if (file.Extension.Equals(
                     ".js",
