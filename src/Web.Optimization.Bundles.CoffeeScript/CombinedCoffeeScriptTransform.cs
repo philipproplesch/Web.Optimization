@@ -11,6 +11,11 @@ namespace Web.Optimization.Bundles.CoffeeScript
     /// </summary>
     public class CombinedCoffeeScriptTransform : IBundleTransform
     {
+        private readonly bool useBareCoffeeScripts;
+        public CombinedCoffeeScriptTransform(bool? useBareCoffeeScripts = null)
+        {
+            this.useBareCoffeeScripts = useBareCoffeeScripts ?? true;
+        }
         public void Process(BundleContext context, BundleResponse response)
         {
             var builder = new StringBuilder();
@@ -23,7 +28,7 @@ namespace Web.Optimization.Bundles.CoffeeScript
                     ".coffee",
                     StringComparison.OrdinalIgnoreCase))
                 {
-                    transform = new CoffeeScriptTransform();
+                    transform = new CoffeeScriptTransform(useBareCoffeeScripts);
                 }
                 else if (file.Extension.Equals(
                     ".js",
