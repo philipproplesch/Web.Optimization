@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Optimization.Bundles.Less", "Web.Optimization.Bundles.Less\Web.Optimization.Bundles.Less.csproj", "{D9F13466-AD69-4270-A9E4-EB8E31727D75}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Optimization.Bundles.CoffeeScript", "Web.Optimization.Bundles.CoffeeScript\Web.Optimization.Bundles.CoffeeScript.csproj", "{28A5ECA4-27AF-44BE-B0CC-62DED84A8F3D}"

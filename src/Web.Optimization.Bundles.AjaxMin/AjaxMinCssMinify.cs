@@ -8,9 +8,15 @@ namespace Web.Optimization.Bundles.AjaxMin
     {
         public override void Process(BundleContext context, BundleResponse response)
         {
+            response.ContentType = ContentTypes.JavaScript;
+            
+            if (context.HttpContext.IsDebuggingEnabled)
+            {
+                return;
+            }
+
             var minifier = new Minifier();
             response.Content = minifier.MinifyStyleSheet(response.Content);
-            response.ContentType = ContentTypes.JavaScript;
         }    
     }
 }

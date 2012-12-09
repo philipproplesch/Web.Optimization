@@ -8,10 +8,15 @@ namespace Web.Optimization.Bundles.YUI
     {
         public override void Process(BundleContext context, BundleResponse response)
         {
-            var compressor = new CssCompressor();
-
-            response.Content = compressor.Compress(response.Content);
             response.ContentType = ContentTypes.Css;
+
+            if (context.HttpContext.IsDebuggingEnabled)
+            {
+                return;
+            }
+
+            var compressor = new CssCompressor();
+            response.Content = compressor.Compress(response.Content);
         }    
     }
 }

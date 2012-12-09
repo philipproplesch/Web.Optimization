@@ -14,9 +14,15 @@ namespace Web.Optimization.Bundles.CoffeeScript
     public class CoffeeScriptTransform : IBundleTransform
     {
         private readonly bool _bare;
-        public CoffeeScriptTransform(bool bare = true)
+
+        public CoffeeScriptTransform(bool bare)
         {
             _bare = bare;
+        }
+
+        public CoffeeScriptTransform()
+            : this(true)
+        {
         }
 
         public void Process(BundleContext context, BundleResponse response)
@@ -44,11 +50,11 @@ namespace Web.Optimization.Bundles.CoffeeScript
                 string.Format(
                     "var compile = function (src) {{ return CoffeeScript.compile(src, {{ bare: {0} }}); }};",
                     _bare.ToString(CultureInfo.InvariantCulture).ToLower());
-            
+
             engine.Execute(wrapperFunction);
-            
+
             var js = engine.CallGlobalFunction("compile", response.Content);
-                
+
             response.ContentType = ContentTypes.JavaScript;
             response.Content = js.ToString();
         }

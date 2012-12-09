@@ -4,11 +4,22 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.Optimization;
 using Web.Optimization.Common;
+using dotless.Core.configuration;
 
 namespace Web.Optimization.Bundles.Less
 {
     public class LessTransform : IBundleTransform
     {
+        private readonly DotlessConfiguration _configuration;
+
+        public LessTransform(DotlessConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+        public LessTransform() : this(DotlessConfiguration.GetDefaultWeb())
+        { }
+
         public void Process(BundleContext context, BundleResponse response)
         {
             var builder = new StringBuilder();
@@ -16,10 +27,14 @@ namespace Web.Optimization.Bundles.Less
             foreach (var file in response.Files)
             {
                 if (!File.Exists(file.FullName))
+                {
                     continue;
+                }
 
                 var content = ResolveImports(file);
-                builder.AppendLine(dotless.Core.Less.Parse(content));
+                
+                builder.AppendLine(
+                    dotless.Core.Less.Parse(content, _configuration));
             }
 
             response.ContentType = ContentTypes.Css;

@@ -7,8 +7,7 @@ namespace Web.Optimization.Bundles
         private readonly IBundleTransform _instance;
         private readonly IBundleTransform _then;
 
-        public ChainedBundle(
-            IBundleTransform instance, IBundleTransform then)
+        public ChainedBundle(IBundleTransform instance, IBundleTransform then)
         {
             _instance = instance;
             _then = then;

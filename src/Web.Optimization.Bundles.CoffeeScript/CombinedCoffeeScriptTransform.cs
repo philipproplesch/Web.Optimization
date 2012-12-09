@@ -40,7 +40,9 @@ namespace Web.Optimization.Bundles.CoffeeScript
                 }
 
                 if (transform == null || !File.Exists(file.FullName))
+                {
                     continue;
+                }
 
                 response.Content = 
                     File.ReadAllText(file.FullName, Encoding.UTF8);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Web.Optimization;
 using Web.Optimization.Configuration;
@@ -7,8 +8,7 @@ namespace Web.Optimization.Extensions
 {
     public static class BundleCollectionExtensions
     {
-        public static void EnableConfigurationBundles(
-            this BundleCollection bundleCollection)
+        public static void EnableConfigurationBundles(this BundleCollection bundleCollection)
         {
             var section = OptimizationSection.GetSection();
             if (section == null)
@@ -17,32 +17,66 @@ namespace Web.Optimization.Extensions
                     "Could not find a section with name 'web.optimization'.");
             }
 
+            Func<Type, bool> isBundleTransformType =
+                type =>
+                    {
+                        if (!typeof (IBundleTransform).IsAssignableFrom(type))
+                        {
+                            throw new ConfigurationErrorsException(
+                                string.Format(
+                                    "Invalid transform type: '{0}'.",
+                                    type.Name));
+
+                        }
+
+                        return true;
+                    };
+
             foreach (BundleElement bundleElement in section.Bundles)
             {
-                var type = Type.GetType(bundleElement.Transform);
-                if (type == null || !typeof(IBundleTransform).IsAssignableFrom(type))
-                {
-                    throw new ConfigurationErrorsException(
-                        string.Format(
-                            "Invalid transform type: '{0}'.",
-                            bundleElement.Transform));
-                }
+                var transforms = new List<IBundleTransform>();
 
-                var transform = Activator.CreateInstance(type);
+                // Check "transform" attribute.
+                var type = bundleElement.Transform;
+                if (type != null && isBundleTransformType(type))
+                {
+                    transforms.Add(
+                        (IBundleTransform)
+                        Activator.CreateInstance(type));
+                }
+                else
+                {
+                    // Check "transformations" node.
+                    foreach (BundleTransformationElement transformation in bundleElement.Transformations)
+                    {
+                        if (!isBundleTransformType(transformation.Type))
+                        {
+                            continue;
+                        }
+
+                        transforms.Add(
+                            (IBundleTransform)
+                            Activator.CreateInstance(transformation.Type));
+                    }
+                }
 
                 var isNewBundle = false;
 
-                // Check if there is a bundle with the same virtual path.
+                // Check if the requested bundle is already configured.
                 var bundle = bundleCollection.GetBundleFor(bundleElement.VirtualPath);
                 if (bundle == null)
                 {
                     isNewBundle = true;
-
-                    bundle = new Bundle(
-                        bundleElement.VirtualPath,
-                        (IBundleTransform)transform);
+                    bundle = new Bundle(bundleElement.VirtualPath);
                 }
-
+                
+                if (transforms.Count > 0)
+                {
+                    // Apply transformations.
+                    bundle.Transforms.Clear();
+                    transforms.ForEach(transform => bundle.Transforms.Add(transform));
+                }
+                
                 foreach (BundleContentElement contentElement in bundleElement.Content)
                 {
                     if (string.IsNullOrEmpty(contentElement.SearchPattern))
@@ -69,7 +103,9 @@ namespace Web.Optimization.Extensions
                 }
 
                 if (isNewBundle)
+                {
                     bundleCollection.Add(bundle);
+                }
             }
         }
     }

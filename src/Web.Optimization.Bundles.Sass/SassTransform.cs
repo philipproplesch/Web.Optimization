@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.Optimization;
@@ -16,24 +14,11 @@ namespace Web.Optimization.Bundles.Sass
         private readonly Pool<ISassCompiler, SassCompilerProxy> _compilerPool =
             new Pool<ISassCompiler, SassCompilerProxy>(() => new SassCompiler());
 
-        public SassTransform()
-        {
-            //var initializeMethod =
-            //    typeof (SassCompiler)
-            //        .GetMethod("Initialize",
-            //                   BindingFlags.NonPublic | BindingFlags.Instance);
-
-            //initializeMethod.Invoke(_compiler, null);
-        }
-
         private static readonly Regex s_sassImportRegex =
             new Regex("@import [\"|'](.+)[\"|'];", RegexOptions.Compiled);
 
         public void Process(BundleContext context, BundleResponse response)
         {
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
-
             var builder = new StringBuilder();
 
             foreach (var file in response.Files)
@@ -50,6 +35,7 @@ namespace Web.Optimization.Bundles.Sass
                     foreach (Match match in matches)
                     {
                         var import = match.Groups[1].Value;
+
                         dependencies.Add(
                             Path.Combine(
                                 directory,
@@ -63,8 +49,6 @@ namespace Web.Optimization.Bundles.Sass
                             dependencies));
                 }
             }
-
-            stopwatch.Stop();
 
             response.ContentType = ContentTypes.Css;
             response.Content = builder.ToString();
