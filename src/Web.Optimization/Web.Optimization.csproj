@@ -50,6 +50,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bundles\BundleBase.cs" />
     <Compile Include="CommonNoTransform.cs" />
     <Compile Include="Common\ContentTypes.cs" />
     <Compile Include="Configuration\BundleElementCollection.cs" />

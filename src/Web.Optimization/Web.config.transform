@@ -8,13 +8,24 @@
     <bundles>
       <bundle virtualPath="~/Content/sample" transform="System.Web.Optimization.JsMinify, System.Web.Optimization">
         <content>
-          <!-- Add some single files -->          
-          <!-- <add path="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js" /> -->
+          <!-- Add some single files -->
           <!-- <add path="~/Scripts/validation.js" /> -->
-          
-          <!-- Add a directory (and its subdirectories) -->          
+          <!-- <add path="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js" /> -->          
+
+          <!-- Add a directory (and its subdirectories) -->
           <!-- <add path="~/Scripts/Plugins" searchPattern="*.js" searchSubdirectories="true" /> -->
         </content>
+        
+        <!--
+        If you want to apply multiple transformations, 
+        you should remove the "transform" attribute from the bundle. 
+        -->
+        <!--
+        <transformations>
+          <add type="Web.Optimization.Bundles.CoffeeScript.CoffeeScriptTransform, Web.Optimization.Bundles.CoffeeScript" />
+          <add type="System.Web.Optimization.JsMinify, System.Web.Optimization" />
+        </transformations>
+        -->
       </bundle>
     </bundles>
   </web.optimization>

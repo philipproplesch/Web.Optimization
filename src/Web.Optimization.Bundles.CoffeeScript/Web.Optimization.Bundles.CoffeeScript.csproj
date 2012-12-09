@@ -51,7 +51,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoffeeScriptBundle.cs" />
     <Compile Include="CoffeeScriptTransform.cs" />
+    <Compile Include="CombinedCoffeeScriptBundle.cs" />
     <Compile Include="CombinedCoffeeScriptTransform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

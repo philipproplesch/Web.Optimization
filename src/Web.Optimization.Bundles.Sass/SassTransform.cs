@@ -45,7 +45,7 @@ namespace Web.Optimization.Bundles.Sass
                     builder.AppendLine(
                         compiler.Compile(
                             file.FullName,
-                            false,
+                            !context.HttpContext.IsDebuggingEnabled,
                             dependencies));
                 }
             }

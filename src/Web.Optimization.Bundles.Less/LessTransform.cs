@@ -17,7 +17,8 @@ namespace Web.Optimization.Bundles.Less
             _configuration = configuration;
         }
 
-        public LessTransform() : this(DotlessConfiguration.GetDefaultWeb())
+        public LessTransform()
+            : this(DotlessConfiguration.GetDefaultWeb())
         { }
 
         public void Process(BundleContext context, BundleResponse response)
@@ -32,16 +33,18 @@ namespace Web.Optimization.Bundles.Less
                 }
 
                 var content = ResolveImports(file);
-                
+
                 builder.AppendLine(
-                    dotless.Core.Less.Parse(content, _configuration));
+                    _configuration.Web
+                        ? dotless.Core.LessWeb.Parse(content, _configuration)
+                        : dotless.Core.Less.Parse(content, _configuration));
             }
 
             response.ContentType = ContentTypes.Css;
             response.Content = builder.ToString();
         }
 
-        private static readonly Regex s_lessImportRegex = 
+        private static readonly Regex s_lessImportRegex =
             new Regex("@import [\"|'](.+)[\"|'];", RegexOptions.Compiled);
 
         private static string ResolveImports(FileInfo file)
@@ -51,29 +54,29 @@ namespace Web.Optimization.Bundles.Less
             return s_lessImportRegex.Replace(
                 content,
                 match =>
+                {
+                    var import = match.Groups[1].Value;
+
+                    // Is absolute path?
+                    Uri uri;
+                    if (Uri.TryCreate(import, UriKind.Absolute, out uri))
                     {
-                        var import = match.Groups[1].Value;
+                        return match.Value;
+                    }
 
-                        // Is absolute path?
-                        Uri uri;
-                        if (Uri.TryCreate(import, UriKind.Absolute, out uri))
-                        {
-                            return match.Value;
-                        }
+                    var path =
+                        Path.Combine(
+                            file.Directory.FullName,
+                            import);
 
-                        var path =
-                            Path.Combine(
-                                file.Directory.FullName,
-                                import);
+                    if (!File.Exists(path))
+                    {
+                        throw new ApplicationException(
+                            string.Concat("Unable to resolve import ", import));
+                    }
 
-                        if (!File.Exists(path))
-                        {
-                            throw new ApplicationException(
-                                string.Concat("Unable to resolve import ", import));
-                        }
-
-                        return match.Value.Replace(import, path);
-                    });
+                    return match.Value.Replace(import, path);
+                });
         }
     }
 }

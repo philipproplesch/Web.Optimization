@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
-#if DEBUG
 using System.Text;
-#endif
 using System.Web.Mvc;
 using System.Web.Optimization;
 using Web.Optimization.Common;
@@ -23,7 +21,7 @@ namespace Web.Optimization.Extensions
             var bundle = BundleTable.Bundles.GetBundleFor(bundleVirtualPath);
             if (bundle == null)
                 return new MvcHtmlString(string.Empty);
-            
+
             Func<string, bool> isJs =
                 extension =>
                 FileTypes.ScriptExtensions.Any(
@@ -46,29 +44,32 @@ namespace Web.Optimization.Extensions
                         BundleTable.Bundles,
                         bundleVirtualPath));
 
-#if DEBUG
-            var builder = new StringBuilder();
-
-            foreach (var file in files)
+            if (instance.ViewContext.HttpContext.IsDebuggingEnabled)
             {
-                builder.AppendLine(
+                var builder = new StringBuilder();
+
+                foreach (var file in files)
+                {
+                    builder.AppendLine(
+                        generateMarkup(
+                            file.Extension,
+                            file.FullName.ToVirtualPath().TrimStart('~'))); // Get rid of the '~'.
+                }
+
+                return new MvcHtmlString(builder.ToString());
+            }
+            else
+            {
+                var file = files.FirstOrDefault();
+
+                if (file == null)
+                    return new MvcHtmlString(string.Empty);
+
+                return new MvcHtmlString(
                     generateMarkup(
                         file.Extension,
-                        file.FullName.ToVirtualPath().TrimStart('~'))); // Get rid of the '~'.
+                        BundleTable.Bundles.ResolveBundleUrl(bundleVirtualPath)));
             }
-
-            return new MvcHtmlString(builder.ToString());
-#else
-            var file = files.FirstOrDefault();
-            
-            if (file == null)
-                return new MvcHtmlString(string.Empty);
-
-            return new MvcHtmlString(
-                generateMarkup(
-                    file.Extension,
-                    BundleTable.Bundles.ResolveBundleUrl(bundleVirtualPath)));
-#endif
         }
     }
 }
