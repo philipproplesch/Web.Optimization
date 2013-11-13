@@ -53,33 +53,33 @@ Web.Optimization allows you to transform LESS and CoffeeScript files by making u
 // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
 public static void RegisterBundles(BundleCollection bundles)
 {
-	// Coffee
-	bundles.Add(new CoffeeScriptBundle("~/bundles/coffee")
-	        .Include("~/Scripts/first.coffee")
-	        .Include("~/Scripts/second.coffee")
-		.Include("~/Scripts/third.coffee")
-	);
-	
-	// Less
-	bundles.Add(new LessStyleBundle("~/Conetnet/less")
-		.Include("~/Scripts/first.less")
-	        .Include("~/Scripts/second.less")
-		.Include("~/Scripts/third.less")
-	);
-	
-	// Scss
-	bundles.Add(new SassStyleBundle("~/Conetnet/less")
-		.Include("~/Scripts/first.Sass")
-	        .Include("~/Scripts/second.Sass")
-		.Include("~/Scripts/third.Sass")
-	);
-	
-	// Combined CoffeeScript and JS
-	bundles.Add(new CombinedCoffeeScriptBundle("~/Conetnet/combined")
-		.Include("~/Scripts/first.coffee")
-	        .Include("~/Scripts/second.js")
-		.Include("~/Scripts/third.coffee")
-	);
+    // Coffee
+    bundles.Add(new CoffeeScriptBundle("~/bundles/coffee")
+        .Include("~/Scripts/first.coffee")
+        .Include("~/Scripts/second.coffee")
+        .Include("~/Scripts/third.coffee")
+    );
+    
+    // Less
+    bundles.Add(new LessStyleBundle("~/Conetnet/less")
+        .Include("~/Scripts/first.less")
+        .Include("~/Scripts/second.less")
+        .Include("~/Scripts/third.less")
+    );
+    
+    // Scss
+    bundles.Add(new SassStyleBundle("~/Conetnet/less")
+        .Include("~/Scripts/first.Sass")
+        .Include("~/Scripts/second.Sass")
+        .Include("~/Scripts/third.Sass")
+    );
+    
+    // Combined CoffeeScript and JS
+    bundles.Add(new CombinedCoffeeScriptBundle("~/Conetnet/combined")
+        .Include("~/Scripts/first.coffee")
+        .Include("~/Scripts/second.js")
+        .Include("~/Scripts/third.coffee")
+    );
 }
 ```
 
