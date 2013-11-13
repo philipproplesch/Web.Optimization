@@ -74,7 +74,7 @@ public static void RegisterBundles(BundleCollection bundles)
         .Include("~/Scripts/third.Sass")
     );
     
-    // Combined CoffeeScript and JS
+    // Combined Coffee Script and JS
     bundles.Add(new CombinedCoffeeScriptBundle("~/Conetnet/combined")
         .Include("~/Scripts/first.coffee")
         .Include("~/Scripts/second.js")
