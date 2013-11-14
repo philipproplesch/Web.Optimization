@@ -13,6 +13,8 @@ namespace Web.Optimization.Bundles.CoffeeScript
     {
         private readonly bool _bare;
 
+        public CombinedCoffeeScriptTransform() { }
+
         public CombinedCoffeeScriptTransform(bool bare = true)
         {
             _bare = bare;
@@ -44,7 +46,7 @@ namespace Web.Optimization.Bundles.CoffeeScript
                     continue;
                 }
 
-                response.Content = 
+                response.Content =
                     File.ReadAllText(file.FullName, Encoding.UTF8);
 
                 transform.Process(context, response);

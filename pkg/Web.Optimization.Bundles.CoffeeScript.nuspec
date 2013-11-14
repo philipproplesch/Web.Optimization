@@ -7,10 +7,10 @@
     <projectUrl>https://github.com/philipproplesch/Web.Optimization</projectUrl>
     <dependencies>
       <dependency id="Jurassic" version="2.1.1" />
-      <dependency id="Microsoft.AspNet.Web.Optimization" version="1.0.0" />
+      <dependency id="Microsoft.AspNet.Web.Optimization" version="1.1.2" />
       <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
-      <dependency id="WebGrease" version="1.3.0" />
-      <dependency id="CoffeeScript" version="1.4.0" />
+      <dependency id="WebGrease" version="1.5.2" />
+      <dependency id="CoffeeScript" version="1.6.3" />
       <dependency id="Web.Optimization" version="0.0.7" />
     </dependencies>
     <id>Web.Optimization.Bundles.CoffeeScript</id>
