@@ -8,7 +8,7 @@ namespace Web.Optimization.Bundles.AjaxMin
     {
         public override void Process(BundleContext context, BundleResponse response)
         {
-            response.ContentType = ContentTypes.JavaScript;
+            response.ContentType = ContentType.JavaScript;
             
             if (context.HttpContext.IsDebuggingEnabled)
             {

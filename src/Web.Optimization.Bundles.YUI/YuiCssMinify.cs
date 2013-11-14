@@ -8,7 +8,7 @@ namespace Web.Optimization.Bundles.YUI
     {
         public override void Process(BundleContext context, BundleResponse response)
         {
-            response.ContentType = ContentTypes.Css;
+            response.ContentType = ContentType.Css;
 
             if (context.HttpContext.IsDebuggingEnabled)
             {

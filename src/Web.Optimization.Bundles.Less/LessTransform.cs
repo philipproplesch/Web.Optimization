@@ -27,12 +27,18 @@ namespace Web.Optimization.Bundles.Less
 
             foreach (var file in response.Files)
             {
-                if (!File.Exists(file.FullName))
+                var path =
+                   context.HttpContext.Server.MapPath(
+                       file.IncludedVirtualPath);
+
+                var fileInfo = new FileInfo(path);
+
+                if (!fileInfo.Exists)
                 {
                     continue;
                 }
 
-                var content = ResolveImports(file);
+                var content = ResolveImports(fileInfo);
 
                 builder.AppendLine(
                     _configuration.Web
@@ -40,7 +46,7 @@ namespace Web.Optimization.Bundles.Less
                         : dotless.Core.Less.Parse(content, _configuration));
             }
 
-            response.ContentType = ContentTypes.Css;
+            response.ContentType = ContentType.Css;
             response.Content = builder.ToString();
         }
 

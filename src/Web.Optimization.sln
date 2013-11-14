@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Optimization.Bundles.Less", "Web.Optimization.Bundles.Less\Web.Optimization.Bundles.Less.csproj", "{D9F13466-AD69-4270-A9E4-EB8E31727D75}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Optimization.Bundles.CoffeeScript", "Web.Optimization.Bundles.CoffeeScript\Web.Optimization.Bundles.CoffeeScript.csproj", "{28A5ECA4-27AF-44BE-B0CC-62DED84A8F3D}"
@@ -19,6 +21,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Optimization.Bundles.YUI", "Web.Optimization.Bundles.YUI\Web.Optimization.Bundles.YUI.csproj", "{7E2C7DF2-FE57-412E-9958-7C90EBDA4E57}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Optimization.Bundles.AjaxMin", "Web.Optimization.Bundles.AjaxMin\Web.Optimization.Bundles.AjaxMin.csproj", "{EB1BC172-CE97-4B0B-85AC-5C249510F24C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Optimization.Samples", "Web.Optimization.Samples\Web.Optimization.Samples.csproj", "{D14D8948-BF17-4385-9385-19098E2AEF9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +54,10 @@ Global
 		{EB1BC172-CE97-4B0B-85AC-5C249510F24C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB1BC172-CE97-4B0B-85AC-5C249510F24C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB1BC172-CE97-4B0B-85AC-5C249510F24C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D14D8948-BF17-4385-9385-19098E2AEF9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D14D8948-BF17-4385-9385-19098E2AEF9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D14D8948-BF17-4385-9385-19098E2AEF9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D14D8948-BF17-4385-9385-19098E2AEF9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

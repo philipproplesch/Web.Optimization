@@ -49,32 +49,33 @@ Web.Optimization allows you to transform LESS and CoffeeScript files by making u
 	}
 
 ## Usage in \App_Start\BundleConfig.cs
+
 ```c#
 // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
 public static void RegisterBundles(BundleCollection bundles)
 {
-    // Coffee
+    // CoffeeScript
     bundles.Add(new CoffeeScriptBundle("~/bundles/coffee")
         .Include("~/Scripts/first.coffee")
         .Include("~/Scripts/second.coffee")
         .Include("~/Scripts/third.coffee")
     );
     
-    // Less
+    // LESS
     bundles.Add(new LessStyleBundle("~/Conetnet/less")
         .Include("~/Scripts/first.less")
         .Include("~/Scripts/second.less")
         .Include("~/Scripts/third.less")
     );
     
-    // Scss
+    // Sass
     bundles.Add(new SassStyleBundle("~/Conetnet/less")
         .Include("~/Scripts/first.Sass")
         .Include("~/Scripts/second.Sass")
         .Include("~/Scripts/third.Sass")
     );
     
-    // Combined Coffee Script and JS
+    // Combined CoffeeScript and JS
     bundles.Add(new CombinedCoffeeScriptBundle("~/Conetnet/combined")
         .Include("~/Scripts/first.coffee")
         .Include("~/Scripts/second.js")

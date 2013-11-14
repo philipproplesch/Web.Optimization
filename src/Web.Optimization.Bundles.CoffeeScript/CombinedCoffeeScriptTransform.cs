@@ -23,38 +23,42 @@ namespace Web.Optimization.Bundles.CoffeeScript
         public void Process(BundleContext context, BundleResponse response)
         {
             var builder = new StringBuilder();
-
+            
             foreach (var file in response.Files)
             {
                 IBundleTransform transform = null;
 
-                if (file.Extension.Equals(
+                if (file.IncludedVirtualPath.EndsWith(
                     ".coffee",
                     StringComparison.OrdinalIgnoreCase))
                 {
                     transform = new CoffeeScriptTransform(_bare);
                 }
-                else if (file.Extension.Equals(
+                else if (file.VirtualFile.VirtualPath.EndsWith(
                     ".js",
                     StringComparison.OrdinalIgnoreCase))
                 {
-                    transform = new CommonNoTransform(ContentTypes.JavaScript);
+                    transform = new CommonNoTransform(ContentType.JavaScript);
                 }
 
-                if (transform == null || !File.Exists(file.FullName))
+                var path =
+                    context.HttpContext.Server.MapPath(
+                        file.IncludedVirtualPath);
+
+                if (transform == null || !File.Exists(path))
                 {
                     continue;
                 }
 
                 response.Content =
-                    File.ReadAllText(file.FullName, Encoding.UTF8);
+                    File.ReadAllText(path, Encoding.UTF8);
 
                 transform.Process(context, response);
 
                 builder.AppendLine(response.Content);
             }
 
-            response.ContentType = ContentTypes.JavaScript;
+            response.ContentType = ContentType.JavaScript;
             response.Content = builder.ToString();
         }
     }

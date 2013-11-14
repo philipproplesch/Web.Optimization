@@ -23,13 +23,17 @@ namespace Web.Optimization.Bundles.Sass
 
             foreach (var file in response.Files)
             {
+                var path =
+                   context.HttpContext.Server.MapPath(
+                       file.IncludedVirtualPath);
+
                 using (var compiler = _compilerPool.GetInstance())
                 {
-                    var content = File.ReadAllText(file.FullName, Encoding.UTF8);
+                    var content = File.ReadAllText(path, Encoding.UTF8);
                     var matches = s_sassImportRegex.Matches(content);
 
-                    var directory = Path.GetDirectoryName(file.FullName);
-                    var extension = Path.GetExtension(file.Name);
+                    var directory = Path.GetDirectoryName(path);
+                    var extension = Path.GetExtension(path);
 
                     var dependencies = new List<string>();
                     foreach (Match match in matches)
@@ -44,13 +48,13 @@ namespace Web.Optimization.Bundles.Sass
 
                     builder.AppendLine(
                         compiler.Compile(
-                            file.FullName,
+                            path,
                             !context.HttpContext.IsDebuggingEnabled,
                             dependencies));
                 }
             }
 
-            response.ContentType = ContentTypes.Css;
+            response.ContentType = ContentType.Css;
             response.Content = builder.ToString();
         }
     }

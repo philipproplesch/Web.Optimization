@@ -55,7 +55,7 @@ namespace Web.Optimization.Bundles.CoffeeScript
 
             var js = engine.CallGlobalFunction("compile", response.Content);
 
-            response.ContentType = ContentTypes.JavaScript;
+            response.ContentType = ContentType.JavaScript;
             response.Content = js.ToString();
         }
     }
