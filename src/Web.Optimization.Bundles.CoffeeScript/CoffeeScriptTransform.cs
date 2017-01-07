@@ -42,8 +42,7 @@ namespace Web.Optimization.Bundles.CoffeeScript
 
             if (!File.Exists(coffeeScriptPath))
             {
-                throw new FileNotFoundException(
-                    $"Could not find coffee-script.js beneath the provided {_scriptPath} directory.");
+                throw new FileNotFoundException($"Could not find coffee-script.js beneath the provided {_scriptPath} directory.");
             }
 
             var coffeeScriptCompiler =
@@ -53,10 +52,7 @@ namespace Web.Optimization.Bundles.CoffeeScript
             engine.Execute(coffeeScriptCompiler);
 
             // Initializes a wrapper function for the CoffeeScript compiler.
-            var wrapperFunction =
-                string.Format(
-                    "var compile = function (src) {{ return CoffeeScript.compile(src, {{ bare: {0} }}); }};",
-                    _bare.ToString(CultureInfo.InvariantCulture).ToLower());
+            var wrapperFunction = $"var compile = function (src) {{ return CoffeeScript.compile(src, {{ bare: {_bare.ToString(CultureInfo.InvariantCulture).ToLower()} }}); }};";
 
             engine.Execute(wrapperFunction);
 
