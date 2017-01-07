@@ -14,8 +14,16 @@ namespace Web.Optimization.Bundles.CoffeeScript
     public class CoffeeScriptTransform : IBundleTransform
     {
         private readonly bool _bare;
+        private readonly string _scriptPath;
+
+        public CoffeeScriptTransform(bool bare, string scriptPath)
+        {
+            _bare = bare;
+            _scriptPath = scriptPath;
+        }
 
         public CoffeeScriptTransform(bool bare)
+            : this(bare, "Scripts\\coffee-script.js")
         {
             _bare = bare;
         }
@@ -30,13 +38,12 @@ namespace Web.Optimization.Bundles.CoffeeScript
             var coffeeScriptPath =
                 Path.Combine(
                     HttpRuntime.AppDomainAppPath,
-                    "Scripts",
-                    "coffee-script.js");
+                    _scriptPath);
 
             if (!File.Exists(coffeeScriptPath))
             {
                 throw new FileNotFoundException(
-                    "Could not find coffee-script.js beneath the ~/Scripts directory.");
+                    $"Could not find coffee-script.js beneath the provided {_scriptPath} directory.");
             }
 
             var coffeeScriptCompiler =
