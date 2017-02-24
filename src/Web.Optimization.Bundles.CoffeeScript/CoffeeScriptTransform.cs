@@ -14,8 +14,16 @@ namespace Web.Optimization.Bundles.CoffeeScript
     public class CoffeeScriptTransform : IBundleTransform
     {
         private readonly bool _bare;
+        private readonly string _scriptPath;
+
+        public CoffeeScriptTransform(bool bare, string scriptPath)
+        {
+            _bare = bare;
+            _scriptPath = scriptPath;
+        }
 
         public CoffeeScriptTransform(bool bare)
+            : this(bare, "Scripts\\coffee-script.js")
         {
             _bare = bare;
         }
@@ -30,13 +38,11 @@ namespace Web.Optimization.Bundles.CoffeeScript
             var coffeeScriptPath =
                 Path.Combine(
                     HttpRuntime.AppDomainAppPath,
-                    "Scripts",
-                    "coffee-script.js");
+                    _scriptPath);
 
             if (!File.Exists(coffeeScriptPath))
             {
-                throw new FileNotFoundException(
-                    "Could not find coffee-script.js beneath the ~/Scripts directory.");
+                throw new FileNotFoundException($"Could not find coffee-script.js beneath the provided {_scriptPath} directory.");
             }
 
             var coffeeScriptCompiler =
@@ -46,10 +52,7 @@ namespace Web.Optimization.Bundles.CoffeeScript
             engine.Execute(coffeeScriptCompiler);
 
             // Initializes a wrapper function for the CoffeeScript compiler.
-            var wrapperFunction =
-                string.Format(
-                    "var compile = function (src) {{ return CoffeeScript.compile(src, {{ bare: {0} }}); }};",
-                    _bare.ToString(CultureInfo.InvariantCulture).ToLower());
+            var wrapperFunction = $"var compile = function (src) {{ return CoffeeScript.compile(src, {{ bare: {_bare.ToString(CultureInfo.InvariantCulture).ToLower()} }}); }};";
 
             engine.Execute(wrapperFunction);
 
